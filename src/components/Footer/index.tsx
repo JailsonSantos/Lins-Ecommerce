@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Instagram, MailOutline, Phone, Room, Twitter, WhatsApp } from '@material-ui/icons';
+import { Facebook, Instagram, LinkedIn, MailOutline, Phone, Room, WhatsApp } from '@material-ui/icons';
 
 import {
   Container,
@@ -29,16 +29,16 @@ export function Footer() {
           Eligendi possimus culpa temporibus laborum accusantium.
         </Description>
         <SocialContainer>
-          <SocialIcon color="#3B5998">
+          <SocialIcon color="#0572e6">
             <Facebook />
           </SocialIcon>
           <SocialIcon color="#E4405F">
             <Instagram />
           </SocialIcon>
-          <SocialIcon color="#55ACEE">
-            <Twitter />
+          <SocialIcon color="#0a66c2">
+            <LinkedIn />
           </SocialIcon>
-          <SocialIcon color="#28a745">
+          <SocialIcon color="#24cb43">
             <WhatsApp />
           </SocialIcon>
         </SocialContainer>

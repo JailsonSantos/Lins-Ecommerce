@@ -1,10 +1,8 @@
 import { Add, Remove } from '@material-ui/icons';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Announcement } from '../../components/Announcement';
 import { Footer } from '../../components/Footer';
 import { Navbar } from '../../components/Navbar';
-
-import { useTheme } from 'styled-components';
 
 import {
   Container,
@@ -39,9 +37,55 @@ import {
 
 } from '../../styles/CartStyles';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+
+import StripeCheckout from 'react-stripe-checkout';
+import { userRequest } from '../../services/api';
+import { useRouter } from 'next/router';
+
+// const KEY = process.env.STRIPE_KEY_PUBLIC;
+
+interface StripeTokenProps {
+  id: string;
+}
+
 export default function Cart() {
 
-  const theme = useTheme();
+  const cart = useSelector((state: RootState) => state.cart)
+  const total = cart.total;
+
+  const router = useRouter();
+
+  const [stripeToken, setStripeToken] = useState<any>({});
+
+  const KEY = "pk_test_51KsYb0K8tmpXblZ8ZTZGudWKJQk4qeJNHZDC7MRJoNvcae5ZxjtdEGI5m38y0yDoCkqkuQNBVkKqV2ONN2tbhCg9001DVkaxkv"
+
+  const onToken = (token: any) => {
+    setStripeToken(token);
+  }
+
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+
+        console.log('TOKEN STRIPE: ', stripeToken);
+
+        const response = await userRequest.post('/checkout/payment', {
+          tokenId: stripeToken.id,
+          amount: total * 100,
+        });
+
+        console.log('RESPONSE: ', response.data)
+        router.push("/", response.data);
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    stripeToken.id !== undefined && total >= 1 && makeRequest();
+  }, [stripeToken, total, router]);
 
   return (
     <Container>
@@ -59,77 +103,72 @@ export default function Cart() {
         </ Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://static.netshoes.com.br/produtos/tenis-feminino-rainha-shoot/50/D50-1062-050/D50-1062-050_zoom1.jpg?ts=1598960717" />
-                <Details>
-                  <ProductName>
-                    <Strong>Product:</Strong> JESSIE THUNDER HOES
-                  </ProductName>
-                  <ProductId>
-                    <Strong>ID:</Strong> 777
-                  </ProductId>
-                  <ProductColor color={theme.backgroundDark} />
-                  <ProductSize>
-                    <Strong>Size:</Strong> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Remove />
-                  <ProductAmount>2</ProductAmount>
-                  <Add />
-                </ProductAmountContainer>
-                <ProductPrice>R$ 99.00</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {
+              cart?.products?.map((product, index) => (
+                <Product key={index} >
+                  <ProductDetail>
+                    <Image src={product.img} />
+                    <Details>
+                      <ProductName>
+                        <Strong>Product:</Strong> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <Strong>ID:</Strong> {product._id}
+                      </ProductId>
+                      <ProductColor color={product.color} />
+                      <ProductSize>
+                        <Strong>Size:</Strong> {product.size}
+                      </ProductSize>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Remove />
+                      <ProductAmount>{product.quantity}</ProductAmount>
+                      <Add />
+                    </ProductAmountContainer>
+                    <ProductPrice>R$ {product.price * product.quantity}</ProductPrice>
+                  </PriceDetail>
+                </Product>
+              ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://static3.tcdn.com.br/img/img_prod/586374/blusa_infantil_feminina_verao_rosa_resistente_a_agua_malwee_2979_1_20200820135324.jpg" />
-                <Details>
-                  <ProductName>
-                    <Strong>Product:</Strong> HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <Strong>ID:</Strong> 777
-                  </ProductId>
-                  <ProductColor color={theme.pink} />
-                  <ProductSize>
-                    <Strong>Size:</Strong> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Remove />
-                  <ProductAmount>1</ProductAmount>
-                  <Add />
-                </ProductAmountContainer>
-                <ProductPrice>R$ 29.00</ProductPrice>
-              </PriceDetail>
-            </Product>
+
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>R$ 190.00</SummaryItemPrice>
+              <SummaryItemPrice>R$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>R$ 39.00</SummaryItemPrice>
+              <SummaryItemPrice>R$ 19.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>R$ - 60.00</SummaryItemPrice>
+              <SummaryItemPrice>R$ - 19.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>R$ 190.00</SummaryItemPrice>
+              <SummaryItemPrice>R$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+
+
+            <StripeCheckout
+              name="Lins E-commerce."
+              description={`Your total is $ ${cart.total}`}
+              image="https://avatars.githubusercontent.com/u/11697713?v=4"
+              billingAddress
+              shippingAddress
+              amount={total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+
+              <Button>CHECKOUT NOW</Button>
+
+            </StripeCheckout>
+
           </Summary>
         </Bottom>
       </Wrapper>

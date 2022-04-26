@@ -15,7 +15,18 @@ import {
   MenuItem
 } from './styles';
 
+import Link from 'next/link';
+
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+
 export function Navbar() {
+
+  const quantity = useSelector((state: RootState) => state.cart.quantity);
+
+  // const cart = useSelector((state: RootState) => state.cart);
+  //console.log("REDUX CART: ", cart);
+
   return (
     <Container>
       <Wrapper>
@@ -27,16 +38,32 @@ export function Navbar() {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>Lins.</Logo>
+          <Link href="/">
+            <a>
+              <Logo>Lins.</Logo>
+            </a>
+          </Link>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
-          </MenuItem>
+          <Link href="/register">
+            <a>
+              <MenuItem>REGISTER</MenuItem>
+            </a>
+          </Link>
+          <Link href="/login">
+            <a>
+              <MenuItem>SIGN IN</MenuItem>
+            </a>
+          </Link>
+          <Link href="/cart">
+            <a>
+              <MenuItem>
+                <Badge badgeContent={quantity} color="primary">
+                  <ShoppingCartOutlined />
+                </Badge>
+              </MenuItem>
+            </a>
+          </Link>
         </Right>
       </Wrapper>
     </Container>

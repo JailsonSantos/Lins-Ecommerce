@@ -102,6 +102,7 @@ export const ProductColor = styled.div<ProductColorProps>`
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  border: 0.5px solid ${({ theme }) => theme.textLight};
   background-color: ${(props) => props.color};
 `;
 

@@ -1,4 +1,5 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@material-ui/icons';
+import Link from 'next/link';
 import React from 'react';
 
 import {
@@ -11,12 +12,19 @@ import {
 
 interface ProductProps {
   product: {
-    id: number,
-    img: string
+    _id: string;
+    title: string;
+    description: string;
+    categories: string[];
+    color: string[];
+    img: string;
+    price: number;
+    size: string[];
   }
 }
 
 export function Product({ product }: ProductProps) {
+
   return (
     <Container>
       <Circle />
@@ -26,7 +34,11 @@ export function Product({ product }: ProductProps) {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <SearchOutlined />
+          <Link href={`/product/${product._id}`}>
+            <a>
+              <SearchOutlined />
+            </a>
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />

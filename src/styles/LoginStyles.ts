@@ -44,11 +44,14 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   width: 40%;
+  display:flex;
   border: none;
   cursor: pointer;
   padding: 15px 20px;
   margin-bottom: 5px;
   border-radius: 5px;
+  align-items: center;
+  justify-content: center;
   color: ${({ theme }) => theme.text};
   outline-color: ${({ theme }) => theme.primary}; 
   background-color: ${({ theme }) => theme.primary};
@@ -56,6 +59,10 @@ export const Button = styled.button`
   &:hover{
     background-color: ${({ theme }) => darken(0.02, theme.primary)};
   }
+`;
+
+export const Error = styled.span`
+  color: ${({ theme }) => theme.error};
 `;
 
 export const Link = styled.a`

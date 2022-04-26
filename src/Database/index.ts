@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: 'https://static1.purepeople.com.br/articles/2/31/07/22/@/3514038-biquini-amp_story_icon-1.jpg',
     title: 'SHIRT STYLE!',
+    cat: 'man'
   },
   {
     id: 2,
     img: 'https://i0.wp.com/juhslife.com/wp-content/uploads/2021/04/maio-e1618485256407-1024x1024.jpg?resize=256%2C256&ssl=1',
     title: 'LOUNGEWEAR LOVE',
+    cat: 'woman'
   },
   {
     id: 3,
     img: 'https://img.olx.com.br/thumbs256x256/68/687101350888117.jpg',
     title: 'LIGHT JACKETS',
+    cat: 'children'
   }
 ]
 

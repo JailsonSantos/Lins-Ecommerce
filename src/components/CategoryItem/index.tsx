@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import {
@@ -13,17 +14,23 @@ interface CategoryItemProps {
     id: number;
     img: string;
     title: string;
+    cat: string;
   }
 }
 
 export function CategoryItem({ category }: CategoryItemProps) {
+
   return (
     <Container>
-      <Image src={category.img} />
-      <Info>
-        <Title>{category.title}</Title>
-        <Button>SHOP NOW</Button>
-      </Info>
+      <Link href={`/category/${category.cat}`}>
+        <a>
+          <Image src={category.img} />
+          <Info>
+            <Title>{category.title}</Title>
+            <Button>SHOP NOW</Button>
+          </Info>
+        </a>
+      </Link>
     </Container>
   );
 }
