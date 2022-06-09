@@ -1,4 +1,4 @@
-/* import { publicRequest } from "../api";
+import { publicRequest } from "../api";
 import { useQuery } from "react-query";
 
 type Product = {
@@ -69,4 +69,4 @@ export function useProducts(page: number) {
   return useQuery(['products', page], () => getProducts(page), {
     staleTime: 1000 * 60 * 10, // Define o tempo que vai estar em fresh por 10 minutos
   });
-} */
+}
