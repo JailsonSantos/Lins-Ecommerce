@@ -50,7 +50,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<SliceState>) => {
+    addProduct: (state, action) => {
       state.quantity += 1;
       state.total += action.payload.total;
       // state.products && state.products.push(action.payload);
