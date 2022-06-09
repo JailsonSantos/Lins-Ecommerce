@@ -13,10 +13,10 @@ import {
 export function Newsletter() {
   return (
     <Container>
-      <Title>Newsletter</Title>
-      <Description>Get timely uploads from your favorite products.</Description>
+      <Title>Boletim Informativo</Title>
+      <Description>Receba novidades dos seus produtos favoritos.</Description>
       <InputContainer>
-        <Input placeholder="Your email" />
+        <Input placeholder="Digite seu email..." />
         <Button>
           <Send />
         </Button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Badge from '@material-ui/core/Badge/Badge';
+import Badge from '@material-ui/core/Badge';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
 
 import {
@@ -12,17 +12,27 @@ import {
   SearchContainer,
   Input,
   Logo,
-  MenuItem
+  MenuItem,
+  ImageAvatar
 } from './styles';
 
 import Link from 'next/link';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { useTheme } from 'styled-components';
+
+import { logout } from '../../redux/apiCalls';
 
 export function Navbar() {
 
+  const theme = useTheme();
+
   const quantity = useSelector((state: RootState) => state.cart.quantity);
+  const { currentUser } = useSelector((state: RootState) => state.user)
+
+  const dispatch = useDispatch();
+
 
   // const cart = useSelector((state: RootState) => state.cart);
   //console.log("REDUX CART: ", cart);
@@ -31,10 +41,10 @@ export function Navbar() {
     <Container>
       <Wrapper>
         <Left>
-          <Language>US</Language>
+          <Language>BR</Language>
           <SearchContainer>
-            <Input placeholder="Search" />
-            <Search style={{ color: 'gray', fontSize: 18 }} />
+            <Input placeholder="Buscar..." />
+            <Search style={{ color: theme.primary, fontSize: 20 }} />
           </SearchContainer>
         </Left>
         <Center>
@@ -47,23 +57,31 @@ export function Navbar() {
         <Right>
           <Link href="/register">
             <a>
-              <MenuItem>REGISTER</MenuItem>
+              <MenuItem>REGISTRAR</MenuItem>
             </a>
           </Link>
-          <Link href="/login">
-            <a>
-              <MenuItem>SIGN IN</MenuItem>
-            </a>
-          </Link>
+          {currentUser._id !== '' ?
+            <MenuItem onClick={() => logout(dispatch)}>SAIR</MenuItem>
+            :
+            <Link href="/login">
+              <a>
+                <MenuItem>LOGIN</MenuItem>
+              </a>
+            </Link>
+          }
           <Link href="/cart">
             <a>
               <MenuItem>
-                <Badge badgeContent={quantity} color="primary">
+                <Badge overlap="rectangular" badgeContent={quantity} color="primary">
                   <ShoppingCartOutlined />
                 </Badge>
               </MenuItem>
             </a>
           </Link>
+          {currentUser._id !== '' &&
+            <ImageAvatar src={currentUser.img} alt={`Imagem de Perfil, ${currentUser.username}`} />
+          }
+
         </Right>
       </Wrapper>
     </Container>

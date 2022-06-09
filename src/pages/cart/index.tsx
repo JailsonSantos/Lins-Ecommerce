@@ -21,6 +21,7 @@ import {
   ProductName,
   ProductId,
   ProductColor,
+  ProductColorArea,
   ProductSize,
   PriceDetail,
   ProductAmountContainer,
@@ -37,14 +38,14 @@ import {
 
 } from '../../styles/CartStyles';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
 import StripeCheckout from 'react-stripe-checkout';
 import { userRequest } from '../../services/api';
 import { useRouter } from 'next/router';
-
-// const KEY = process.env.STRIPE_KEY_PUBLIC;
+import Link from 'next/link';
+import { clearCart } from '../../redux/apiCalls';
 
 interface StripeTokenProps {
   id: string;
@@ -52,18 +53,35 @@ interface StripeTokenProps {
 
 export default function Cart() {
 
+  const router = useRouter();
   const cart = useSelector((state: RootState) => state.cart)
+  const { currentUser } = useSelector((state: RootState) => state.user)
   const total = cart.total;
 
-  const router = useRouter();
+  const dispatch = useDispatch();
 
   const [stripeToken, setStripeToken] = useState<any>({});
 
-  const KEY = "pk_test_51KsYb0K8tmpXblZ8ZTZGudWKJQk4qeJNHZDC7MRJoNvcae5ZxjtdEGI5m38y0yDoCkqkuQNBVkKqV2ONN2tbhCg9001DVkaxkv"
+  const KEY = process.env.NEXT_PUBLIC_STRIPE_KEY_PUBLIC;
 
   const onToken = (token: any) => {
     setStripeToken(token);
   }
+
+  /* 
+  const { quantity } = cart;
+  const [quantityTotal, setQuantityTotal] = useState(quantity);
+  
+  const handleQuantity = (type: string) => {
+      if (type === 'desc') {
+        quantityTotal > 1 && setQuantityTotal(quantityTotal - 1)
+  
+        console.log(quantityTotal)
+      } else {
+        setQuantityTotal(quantityTotal + 1)
+        console.log(quantityTotal)
+      }
+    } */
 
 
   useEffect(() => {
@@ -92,32 +110,50 @@ export default function Cart() {
       <Navbar />
       <Announcement />
       <Wrapper>
-        <Title>YOUR BAG</Title>
+        <Title>SUAS COMPRAS</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <Link href="/">
+            <a>
+              <TopButton>
+                CONTINUAR COMPRANDO
+              </TopButton>
+            </a>
+          </Link>
+
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText>Sacola de compras(2)</TopText>
+            <TopText>Lista de desejos(0)</TopText>
           </TopTexts>
-          <TopButton filled="filled">CHECKOUT NOW</TopButton>
+
+          <TopButton
+            filled="filled"
+            onClick={() => clearCart(dispatch)}
+          >
+            CANCELAR COMPRA
+          </TopButton>
+
         </ Top>
         <Bottom>
           <Info>
-            {
+            {cart.quantity > 0 &&
               cart?.products?.map((product, index) => (
+
                 <Product key={index} >
                   <ProductDetail>
                     <Image src={product.img} />
                     <Details>
                       <ProductName>
-                        <Strong>Product:</Strong> {product.title}
+                        <Strong>Produto: </Strong> {product.title}
                       </ProductName>
                       <ProductId>
-                        <Strong>ID:</Strong> {product._id}
+                        <Strong>Id:</Strong> {product._id}
                       </ProductId>
-                      <ProductColor color={product.color} />
+                      <ProductColorArea>
+                        <Strong>Cor:</Strong>
+                        <ProductColor color={product.color} />
+                      </ProductColorArea>
                       <ProductSize>
-                        <Strong>Size:</Strong> {product.size}
+                        <Strong>Tamanho: </Strong> {product.size}
                       </ProductSize>
                     </Details>
                   </ProductDetail>
@@ -127,47 +163,57 @@ export default function Cart() {
                       <ProductAmount>{product.quantity}</ProductAmount>
                       <Add />
                     </ProductAmountContainer>
-                    <ProductPrice>R$ {product.price * product.quantity}</ProductPrice>
+                    <ProductPrice>R$ {(product.price * product.quantity).toFixed(2)}</ProductPrice>
                   </PriceDetail>
+                  <Hr />
                 </Product>
               ))}
-            <Hr />
 
           </Info>
           <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+            <SummaryTitle>RESUMO DO PEDIDO</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>R$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>R$ {cart.total.toFixed(2)}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
+              <SummaryItemText>Valor do Envio</SummaryItemText>
               <SummaryItemPrice>R$ 19.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
+              <SummaryItemText>Desconto do Envio</SummaryItemText>
               <SummaryItemPrice>R$ - 19.00</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>R$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>R$ {cart.total.toFixed(2)}</SummaryItemPrice>
             </SummaryItem>
 
+            {currentUser._id !== '' ?
 
-            <StripeCheckout
-              name="Lins E-commerce."
-              description={`Your total is $ ${cart.total}`}
-              image="https://avatars.githubusercontent.com/u/11697713?v=4"
-              billingAddress
-              shippingAddress
-              amount={total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
+              <StripeCheckout
+                name="Lins E-commerce."
+                description={`Your total is $ ${cart.total}`}
+                image="https://avatars.githubusercontent.com/u/11697713?v=4"
+                billingAddress
+                shippingAddress
+                amount={total * 100}
+                token={onToken}
+                stripeKey={KEY ? KEY : ''}
+              >
+                <Button>CONFIRMAR COMPRA</Button>
+              </StripeCheckout>
 
-              <Button>CHECKOUT NOW</Button>
+              :
 
-            </StripeCheckout>
+              <Link href="/login">
+                <a>
+                  <Button>
+                    CONFIRMAR COMPRA
+                  </Button>
+                </a>
+              </Link>
+            }
 
           </Summary>
         </Bottom>

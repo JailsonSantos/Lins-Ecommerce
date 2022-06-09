@@ -37,6 +37,10 @@ export const SearchContainer = styled.div`
   align-items: center;
   border: 1px solid ${({ theme }) => theme.shade};
 
+  svg{
+    cursor: pointer;
+  }
+
   ${mobile({ marginLeft: '5px' })}
 `;
 
@@ -55,7 +59,6 @@ export const Center = styled.div`
 
 export const Logo = styled.h1`
   font-weight: bold;
-
   ${mobile({ fontSize: '24px' })}
 `;
 
@@ -71,7 +74,23 @@ export const Right = styled.div`
 export const MenuItem = styled.div`
   font-size: 1rem;
   cursor: pointer;
-  margin-left: 2rem;
+  margin-left: 1rem;
+  padding: 5px;
+  border-radius: 5px;
+  transition: 0.3s;
+
+  &:hover{
+    color: ${({ theme }) => theme.text};
+    background-color: ${({ theme }) => theme.primary};
+  }
   
   ${mobile({ fontSize: '12px', marginLeft: '10px' })}
+`;
+
+export const ImageAvatar = styled.img`
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-left: 1rem;
+  border-radius: 50%;
 `;

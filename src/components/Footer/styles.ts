@@ -20,7 +20,9 @@ export const Left = styled.div`
   flex-direction: column;
 `;
 
-export const Logo = styled.h1``;
+export const Logo = styled.h1`
+   color: ${({ theme }) => theme.primary};
+`;
 
 export const Description = styled.p`
   margin:  20px 0;

@@ -25,21 +25,21 @@ export const slideItems = [
 export const categories = [
   {
     id: 1,
-    img: 'https://static1.purepeople.com.br/articles/2/31/07/22/@/3514038-biquini-amp_story_icon-1.jpg',
-    title: 'SHIRT STYLE!',
-    cat: 'man'
+    img: 'https://i0.wp.com/www.canalmasculino.com.br/wp-content/uploads/2020/10/gravata-masculina-roupa-profissional.jpg?fit=564%2C868&ssl=1',
+    title: 'Moda Masculina',
+    cat: 'Masculina'
   },
   {
     id: 2,
-    img: 'https://i0.wp.com/juhslife.com/wp-content/uploads/2021/04/maio-e1618485256407-1024x1024.jpg?resize=256%2C256&ssl=1',
-    title: 'LOUNGEWEAR LOVE',
-    cat: 'woman'
+    img: 'https://d3g37he68niee0.cloudfront.net/SP/dafiti/3061819_01.jpg',
+    title: 'Moda Feminina',
+    cat: 'Feminina'
   },
   {
     id: 3,
-    img: 'https://img.olx.com.br/thumbs256x256/68/687101350888117.jpg',
-    title: 'LIGHT JACKETS',
-    cat: 'children'
+    img: 'https://cdn.shopify.com/s/files/1/0486/4278/5429/files/meninos-home_600x600@2x.jpg?v=1615680403',
+    title: 'Moda Infantil',
+    cat: 'Infantil'
   }
 ]
 

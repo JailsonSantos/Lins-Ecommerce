@@ -93,6 +93,16 @@ export const AmountContainer = styled.div`
   display: flex;
   font-weight: 700;
   align-items: center;
+
+  svg{ 
+    margin: 0 2px;
+  }
+
+  svg:hover{ 
+    cursor: pointer;
+    border-radius: 50%;
+    border: 0.5px solid ${({ theme }) => theme.shade};
+  }
 `;
 
 export const Amount = styled.span`

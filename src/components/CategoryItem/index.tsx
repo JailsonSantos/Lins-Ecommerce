@@ -27,7 +27,7 @@ export function CategoryItem({ category }: CategoryItemProps) {
           <Image src={category.img} />
           <Info>
             <Title>{category.title}</Title>
-            <Button>SHOP NOW</Button>
+            <Button>VER PRODUTOS</Button>
           </Info>
         </a>
       </Link>

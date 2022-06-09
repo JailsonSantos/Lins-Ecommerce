@@ -24,9 +24,10 @@ export function Footer() {
       <Left>
         <Logo>Lins.</Logo>
         <Description>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Pariatur quos labore animi nesciunt porro ratione expedita, ea voluptas.
-          Eligendi possimus culpa temporibus laborum accusantium.
+          É uma loja que disponibiliza os melhores produtos do mercado,
+          além de contar com excelentes preços e promoções, você consegue fazer suas compras,
+          na comodidade da sua casa, com apenas alguns cliques, conheça nossos produtos e venha
+          fazer parte desse Revolucionário Mundo da Moda.
         </Description>
         <SocialContainer>
           <SocialIcon color="#0572e6">
@@ -44,21 +45,42 @@ export function Footer() {
         </SocialContainer>
       </Left>
       <Center>
-        <Title>Useful Links</Title>
+        <Title>Links Úteis</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem>
+            <a>Início</a>
+          </ListItem>
+          <ListItem>
+            <a>Carrinho de compras</a>
+          </ListItem>
+          <ListItem>
+            <a>Coleção Masculina</a>
+          </ListItem>
+          <ListItem>
+            <a>Coleção Feminina</a>
+          </ListItem>
+          <ListItem>
+            <a>Coleção Infantil</a>
+          </ListItem>
+          <ListItem>
+            <a>Acessórios</a>
+          </ListItem>
+          <ListItem>
+            <a>Minha conta</a>
+          </ListItem>
+          <ListItem>
+            <a>Acompanhar pedidos</a>
+          </ListItem>
+          <ListItem>
+            <a>Lista de desejos</a>
+          </ListItem>
+          <ListItem>
+            <a>Termos de compras</a>
+          </ListItem>
         </List>
       </Center>
       <Right>
-        <Title>Contact</Title>
+        <Title>Contatos</Title>
         <ContactItem>
           <Room />
           <DescriptionItem>
@@ -68,14 +90,12 @@ export function Footer() {
         <ContactItem>
           <Phone />
           <DescriptionItem>
-
             (98) 98856-5096
           </DescriptionItem>
         </ContactItem>
         <ContactItem>
           <MailOutline />
           <DescriptionItem>
-
             jailson.ads007@gmail.com
           </DescriptionItem>
         </ContactItem>

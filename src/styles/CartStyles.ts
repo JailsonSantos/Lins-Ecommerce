@@ -101,9 +101,15 @@ export const ProductId = styled.span``;
 export const ProductColor = styled.div<ProductColorProps>`
   width: 20px;
   height: 20px;
+  margin-left: 5px;
   border-radius: 50%;
   border: 0.5px solid ${({ theme }) => theme.textLight};
   background-color: ${(props) => props.color};
+`;
+
+export const ProductColorArea = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const ProductSize = styled.span``;
@@ -138,6 +144,7 @@ export const ProductPrice = styled.div`
 export const Hr = styled.hr`
   height: 1px;
   border: none;
+  margin: 10px 0;
   background-color: ${({ theme }) => theme.borderLight};
 `
 export const Summary = styled.div`
@@ -148,7 +155,7 @@ export const Summary = styled.div`
   border: 1px solid ${({ theme }) => theme.borderLight};
 `;
 
-export const SummaryTitle = styled.h1`
+export const SummaryTitle = styled.h2`
   font-weight: 200;
 `;
 

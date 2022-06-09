@@ -1,22 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Product } from '../Product';
-import { popularProducts } from '../../Database';
-
-import {
-  Container
-} from './styles';
+import { Container, ProductList } from './styles';
 import { publicRequest } from '../../services/api';
-import axios from 'axios';
-
-/* interface CategoryProps {
-  category?: string | string[];
-}
-interface SortProps {
-  sort?: string | string[];
-}
-
-*/
-
+import { Pagination } from '../Pagination';
+//import { useProducts } from '../../services/hooks/useProducts';
 
 interface ProductsProps {
   category?: string | string[];
@@ -42,24 +29,15 @@ interface ProductsListProps {
     size: string;
   }
 }
-/* 
-inStock: true
-
-updatedAt: "2022-04-19T19:14:02.455Z"
-*/
 
 export function Products({ category, filters, sort }: ProductsProps) {
 
-  // console.log(category, filters, sort);
+  const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
 
-  //  console.log(filters?.color)
-  // console.log(filters?.size)
-  /* 
-    const [productsList, setProductsList] = useState<any[]>([]);
-    const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
-   */
-  const [products, setProducts] = useState<ProductsListProps[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<ProductsListProps[]>([]);
+  const [page, setPage] = useState(1);
+  //  const { data, isLoading, isFetching, error } = useProducts(page);
+  //  console.log(data)
 
   useEffect(() => {
     const getProducts = async () => {
@@ -70,13 +48,16 @@ export function Products({ category, filters, sort }: ProductsProps) {
             : "products"
         );
         setProducts(response.data);
-      } catch (err) { }
+      } catch (err: any) {
+        console.log(err.message)
+      }
     };
     getProducts();
   }, [category]);
 
+
   useEffect(() => {
-    category || filters !== undefined &&
+    category && filters !== undefined &&
       setFilteredProducts(
         products.filter((item) =>
           Object.entries(filters).every(([key, value]) =>
@@ -91,80 +72,37 @@ export function Products({ category, filters, sort }: ProductsProps) {
     if (sort === "newest") {
       setFilteredProducts((prev) => [...prev].sort((a, b) => a.createdAt - b.createdAt));
     } else if (sort === "asc") {
-      setFilteredProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
+      setFilteredProducts((prev) => [...prev].sort((a, b) => a.price - b.price)); // Menor Preço
     } else {
-      setFilteredProducts((prev) => [...prev].sort((b, a) => b.price - a.price));
+      setFilteredProducts((prev) => [...prev].sort((a, b) => b.price - a.price)); // Maior Preço
     }
   }, [sort]);
 
-  //console.log(typeof products[0].createdAt)
-
-  /*  // GET ALL PRODUCTS OR PRODUCTS FOR CATEGORIES
-   useEffect(() => {
-     const getProducts = async () => {
-       try {
-         const response = await api.get(
-           category
-             ? `products?category=${category}`
-             : "products"
-         );
-         setProductsList(response.data);
-       } catch (error) {
-         console.log(error);
-       }
-     };
- 
-     getProducts();
-   }, [category]); */
-  /* 
-    useEffect(() => {
-      category || filters !== undefined &&
-  
-        productsList.filter((item) => Object.entries(filters).every(([key, value]) => item[key].includes(value)))
-  
-      setFilteredProducts(productsList);
-  
-    }, [productsList, category, filters]);
-   */
-
-  // console.log(category);
-
   return (
     <Container>
-      {/* 
       {
-        products.map((product) => (
-          <Product key={product._id} product={product} />
-        ))
-      } */}
-
-      {category ?
-        <>
-          {
-            filteredProducts.map((product) => (
+        category ?
+          <>
+            {filteredProducts.map((product) => (
               <Product key={product._id} product={product} />
-            ))
-          }
-        </>
-        :
-        <>
-          {
-            products.slice(0, 3).map((product) => (
-              <Product key={product._id} product={product} />
-            ))
-          }
-        </>
+            ))}
+            <Pagination
+              totalCountOfRegisters={filteredProducts.length}
+              currentPage={page}
+              onPageChange={setPage}
+            />
+
+          </>
+          :
+          <>
+            <ProductList>Produtos em Destaque</ProductList>
+            <Container>
+              {products.slice(0, 12).map((product) => (
+                <Product key={product._id} product={product} />
+              ))}
+            </Container>
+          </>
       }
-
-
-      {/*   
-           {
-        filteredProducts.map((product) => (
-          <Product key={product._id} product={product} />
-        ))
-      }
-
-      */}
     </Container>
   );
 }

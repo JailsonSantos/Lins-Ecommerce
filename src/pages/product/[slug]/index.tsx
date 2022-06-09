@@ -55,8 +55,8 @@ export default function Product() {
   const id = router.query.slug;
   const [product, setProduct] = useState<ProductProps>({} as ProductProps);
   const [quantity, setQuantity] = useState(1);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [color, setColor] = useState("black");
+  const [size, setSize] = useState("P");
 
   const dispatch = useDispatch();
 
@@ -65,8 +65,8 @@ export default function Product() {
       try {
         const response = await publicRequest.get(`/products/find/${id}`);
         setProduct(response.data);
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        console.log(error.message);
       }
     }
     getProduct();
@@ -113,7 +113,7 @@ export default function Product() {
           <Price>R$ {product.price}</Price>
           <FilterContainer>
             <Filter>
-              <FilterTitle>Color</FilterTitle>
+              <FilterTitle>Cor</FilterTitle>
               {
                 product.color?.map((color) => (
                   <FilterColor key={color} color={color} onClick={() => setColor(color)} />
@@ -121,7 +121,7 @@ export default function Product() {
               }
             </Filter>
             <Filter>
-              <FilterTitle>Size</FilterTitle>
+              <FilterTitle>Tamanho</FilterTitle>
               <FilterSize onChange={(event) => setSize(event.target.value)}>
                 {
                   product.size?.map((size) => (
@@ -138,7 +138,7 @@ export default function Product() {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button onClick={handleClickCart}>ADD TO CART</Button>
+            <Button onClick={handleClickCart}>ADICONAR AO CARRINHO</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

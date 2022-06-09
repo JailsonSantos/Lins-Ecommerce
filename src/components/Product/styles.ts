@@ -42,6 +42,7 @@ export const Circle = styled.div`
 
 export const Image = styled.img`
   z-index: 2;
+  max-width: 400px;
 `;
 
 export const Icon = styled.div`

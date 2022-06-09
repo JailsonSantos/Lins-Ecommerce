@@ -40,11 +40,14 @@ export const Button = styled.button`
   cursor: pointer;
   transition: 0.5s;
   font-weight: 600;
+  border-radius: 5px;
   color: ${({ theme }) => theme.shade};
   background-color: ${({ theme }) => theme.background};
 
   &:hover{
     font-weight: 600;
-    color: ${({ theme }) => darken(0.5, theme.background)};
+    color: ${({ theme }) => theme.text};
+    background-color: ${({ theme }) => theme.primary}
+
   }
 `;

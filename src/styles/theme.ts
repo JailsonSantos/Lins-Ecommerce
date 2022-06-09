@@ -9,7 +9,7 @@ const theme = {
   blue: '#4351de',
   green: '#28a745',
 
-  primary: '#00947e',
+  primary: '#fd840e',
   secondary: '#7AC7E3',
   gradient: 'linear-gradient(225deg, #313860 0%, #11172B 100%);',
 
@@ -21,7 +21,7 @@ const theme = {
   border: '#313958',
   borderLight: '#ECECEC',
   inputBackground: '#1E253E',
-  error: '#d45d5d'
+  error: '#e73f5d'
 };
 
 export default theme;

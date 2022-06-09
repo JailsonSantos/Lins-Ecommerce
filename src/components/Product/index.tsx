@@ -27,7 +27,7 @@ export function Product({ product }: ProductProps) {
 
   return (
     <Container>
-      <Circle />
+      {/*    <Circle /> */}
       <Image src={product.img} />
       <Info>
         <Icon>

@@ -6,3 +6,12 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
 `;
+
+export const ProductList = styled.h1`
+  width: 400px;
+  margin: 10px auto 20px auto;
+  border-radius: 50px;
+  text-align: center;
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.primary};
+`;

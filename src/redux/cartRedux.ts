@@ -14,9 +14,7 @@ interface ProductProps {
   total?: number;
   createdAt?: string;
   updatedAt?: string;
-  __v?: number;
 }
-
 
 export interface SliceState {
   products?: ProductProps[];
@@ -27,24 +25,21 @@ export interface SliceState {
 }
 
 const initialState: SliceState = {
-  products: [
-    {
-      _id: '',
-      title: '',
-      description: '',
-      img: '',
-      categories: [''],
-      size: '',
-      color: '',
-      price: 0,
-      inStock: true,
-      createdAt: '',
-      updatedAt: '',
-      __v: 0,
-      quantity: 0,
-      total: 0,
-    }
-  ],
+  products: [{
+    _id: '',
+    title: '',
+    description: '',
+    img: '',
+    categories: [''],
+    size: '',
+    color: '',
+    price: 0,
+    inStock: true,
+    createdAt: '',
+    updatedAt: '',
+    quantity: 0,
+    total: 0,
+  }],
   quantity: 0,
   total: 0,
 }
@@ -66,8 +61,13 @@ export const cartSlice = createSlice({
         state.products?.push(action.payload);
       }
     },
+    removeSuccess: (state, action) => {
+      state.products = [action.payload];
+      state.quantity = 0;
+      state.total = 0;
+    },
   }
 });
 
-export const { addProduct } = cartSlice.actions;
+export const { addProduct, removeSuccess } = cartSlice.actions;
 export default cartSlice.reducer;

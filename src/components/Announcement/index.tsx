@@ -5,7 +5,7 @@ import { Container } from './styles';
 export function Announcement() {
   return (
     <Container>
-      Super Deal! Free shipping on orders over $50
+      Super Opertas! Frete Grátis para compras acima de RS 50,00
     </Container>
   );
 }
