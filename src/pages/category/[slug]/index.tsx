@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Navbar } from '../../../components/Navbar';
 import { Footer } from '../../../components/Footer';
@@ -16,6 +16,7 @@ import {
   Option,
 } from '../../../styles/ProductListStyles';
 import { Pagination } from '../../../components/Pagination';
+import { publicRequest } from '../../../services/api';
 
 interface EventProps {
   target: {
@@ -34,7 +35,7 @@ export default function ProductsList() {
   const router = useRouter();
   const category = router.query.slug;
   const [sort, setSort] = useState('newest');
-  const [filters, setFilters] = useState<any>({});
+  const [filters, setFilters] = useState<FilterProps>({} as FilterProps);
 
   // APPLY FILTERS
   const handleFilters = (event: EventProps) => {
@@ -55,12 +56,18 @@ export default function ProductsList() {
           <FilterText>Filtrar:</FilterText>
           <Select name='color' onChange={handleFilters}>
             <Option disabled>Color</Option>
-            <Option>Preta</Option>
-            <Option>Branco</Option>
-            <Option>Marron</Option>
-            <Option>Azul</Option>
-            <Option>Vermelho</Option>
-            <Option>Verde</Option>
+            <Option value="Yellow">Amarelo</Option>
+            <Option value="Blue">Azul</Option>
+            <Option value="Beige">Bege</Option>
+            <Option value="White">Branco</Option>
+            <Option value="Gray">Cinza</Option>
+            <Option value="Orange">Laranja</Option>
+            <Option value="Brown">Marron</Option>
+            <Option value="Black">Preto</Option>
+            <Option value="Purple">Roxo</Option>
+            <Option value="Pink">Rosa</Option>
+            <Option value="Green">Verde</Option>
+            <Option value="Red">Vermelho</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled>Size</Option>
@@ -75,8 +82,8 @@ export default function ProductsList() {
           <FilterText>Sort Products</FilterText>
           <Select onChange={(event) => setSort(event.target.value)}>
             <Option value="newest">Mais novo</Option>
-            <Option value="asc">Preço (Min)</Option>
-            <Option value="desc">Preço (Max)</Option>
+            <Option value="desc">Maior Preço</Option>
+            <Option value="asc">Menor Preço</Option>
           </Select>
         </Filter>
       </FilterContainer>

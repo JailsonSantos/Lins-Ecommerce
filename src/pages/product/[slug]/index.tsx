@@ -98,6 +98,8 @@ export default function Product() {
     );
   };
 
+  console.log(color)
+
   return (
     <Container>
       <Navbar />
@@ -116,7 +118,7 @@ export default function Product() {
               <FilterTitle>Cor</FilterTitle>
               {
                 product.color?.map((color) => (
-                  <FilterColor key={color} color={color} onClick={() => setColor(color)} />
+                  <FilterColor className="ativo" key={color} color={color} onClick={() => setColor(color)} />
                 ))
               }
             </Filter>

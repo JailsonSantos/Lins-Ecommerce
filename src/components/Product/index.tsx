@@ -7,7 +7,9 @@ import {
   Circle,
   Image,
   Info,
-  Icon
+  Icon,
+  IconPrice,
+  InfoAreaIcon
 } from './styles';
 
 interface ProductProps {
@@ -30,20 +32,26 @@ export function Product({ product }: ProductProps) {
       {/*    <Circle /> */}
       <Image src={product.img} />
       <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon>
-          <Link href={`/product/${product._id}`}>
-            <a>
-              <SearchOutlined />
-            </a>
-          </Link>
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
+        <InfoAreaIcon>
+          <Icon>
+            <ShoppingCartOutlined />
+          </Icon>
+          <Icon>
+            <Link href={`/product/${product._id}`}>
+              <a>
+                <SearchOutlined />
+              </a>
+            </Link>
+          </Icon>
+          <Icon>
+            <FavoriteBorderOutlined />
+          </Icon>
+        </InfoAreaIcon>
+        <IconPrice>
+          Valor do Produto: R$ {product.price.toFixed(2)}
+        </IconPrice>
       </Info>
+
     </Container>
   );
 }

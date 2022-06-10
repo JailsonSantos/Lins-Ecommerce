@@ -70,13 +70,25 @@ export function Products({ category, filters, sort }: ProductsProps) {
   useEffect(() => {
 
     if (sort === "newest") {
+
       setFilteredProducts((prev) => [...prev].sort((a, b) => a.createdAt - b.createdAt));
+
+      // console.log('novo', filteredProducts);
+
     } else if (sort === "asc") {
       setFilteredProducts((prev) => [...prev].sort((a, b) => a.price - b.price)); // Menor Preço
+      // console.log('menor', filteredProducts);
     } else {
       setFilteredProducts((prev) => [...prev].sort((a, b) => b.price - a.price)); // Maior Preço
+      // console.log('maior', filteredProducts);
     }
   }, [sort]);
+
+  // const hoje = new Date()
+  //const diaTal = new Date("2022-06-06T21:00:32.042Z")
+  //console.log(hoje > diaTal)
+
+  //console.log(Number(filteredProducts[0].createdAt));
 
   return (
     <Container>

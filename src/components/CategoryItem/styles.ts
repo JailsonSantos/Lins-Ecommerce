@@ -1,4 +1,3 @@
-import { darken } from 'polished';
 import styled from 'styled-components';
 import { mobile } from '../../styles/Responsive';
 
@@ -14,7 +13,7 @@ export const Image = styled.img`
   height: 100%;
   object-fit: cover;
 
-  ${mobile({ height: '25vh' })}
+  ${mobile({ height: '50vh' })}
 `;
 
 export const Info = styled.div`

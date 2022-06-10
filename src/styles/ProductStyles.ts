@@ -71,6 +71,8 @@ export const FilterColor = styled.div`
   border: 0.5px solid ${({ theme }) => theme.textLight};;
   border-radius: 50%;
   background-color: ${(props) => props.color};
+
+
 `;
 
 export const FilterSize = styled.select`

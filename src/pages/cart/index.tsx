@@ -1,5 +1,5 @@
 import { Add, Remove } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Announcement } from '../../components/Announcement';
 import { Footer } from '../../components/Footer';
 import { Navbar } from '../../components/Navbar';
@@ -129,7 +129,7 @@ export default function Cart() {
             filled="filled"
             onClick={() => clearCart(dispatch)}
           >
-            CANCELAR COMPRA
+            LIMPAR O CARRINHO DE COMPRAS
           </TopButton>
 
         </ Top>
@@ -137,36 +137,37 @@ export default function Cart() {
           <Info>
             {cart.quantity > 0 &&
               cart?.products?.map((product, index) => (
-
-                <Product key={index} >
-                  <ProductDetail>
-                    <Image src={product.img} />
-                    <Details>
-                      <ProductName>
-                        <Strong>Produto: </Strong> {product.title}
-                      </ProductName>
-                      <ProductId>
-                        <Strong>Id:</Strong> {product._id}
-                      </ProductId>
-                      <ProductColorArea>
-                        <Strong>Cor:</Strong>
-                        <ProductColor color={product.color} />
-                      </ProductColorArea>
-                      <ProductSize>
-                        <Strong>Tamanho: </Strong> {product.size}
-                      </ProductSize>
-                    </Details>
-                  </ProductDetail>
-                  <PriceDetail>
-                    <ProductAmountContainer>
-                      <Remove />
-                      <ProductAmount>{product.quantity}</ProductAmount>
-                      <Add />
-                    </ProductAmountContainer>
-                    <ProductPrice>R$ {(product.price * product.quantity).toFixed(2)}</ProductPrice>
-                  </PriceDetail>
+                <Fragment key={index}>
+                  <Product>
+                    <ProductDetail>
+                      <Image src={product.img} />
+                      <Details>
+                        <ProductId>
+                          <Strong>Cód. do produto:</Strong> {product._id}
+                        </ProductId>
+                        <ProductName>
+                          <Strong>Descrição: </Strong> {product.title}
+                        </ProductName>
+                        <ProductSize>
+                          <Strong>Tamanho: </Strong> {product.size}
+                        </ProductSize>
+                        <ProductColorArea>
+                          <Strong>Cor:</Strong>
+                          <ProductColor color={product.color} />
+                        </ProductColorArea>
+                      </Details>
+                    </ProductDetail>
+                    <PriceDetail>
+                      <ProductAmountContainer>
+                        <Remove />
+                        <ProductAmount>{product.quantity}</ProductAmount>
+                        <Add />
+                      </ProductAmountContainer>
+                      <ProductPrice>R$ {(product.price * product.quantity).toFixed(2)}</ProductPrice>
+                    </PriceDetail>
+                  </Product>
                   <Hr />
-                </Product>
+                </Fragment>
               ))}
 
           </Info>

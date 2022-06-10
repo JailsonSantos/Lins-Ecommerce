@@ -9,12 +9,12 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background: linear-gradient(rgba(255, 255, 255,0.5),rgba(255, 255, 255, 0.5)),
-  url("https://www.estratosferaoficial.com.br/images-i/cat-a/banner.png") center;
+  url("https://grupodicas.com.br/wp-content/uploads/2018/05/Compras-1-1.jpg") center;
   background-size: cover;
 `;
 
 export const Wrapper = styled.div`
-  width: 40% ;
+  width: 30%;
   padding: 20px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background};
@@ -25,11 +25,12 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   font-weight: 300;
   font-size: 1.5rem;
+  text-align: center;
 `;
 
 export const Form = styled.form`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 
   ${mobile({ flexDirection: 'column' })}
 `;
@@ -51,18 +52,35 @@ export const Agreement = styled.span`
   font-size: .8rem;
 `;
 
+export const AreaLogin = styled.a`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  svg{ 
+    margin-right: 5px;
+  }
+
+  &:hover{
+    color: ${({ theme }) => theme.primary};
+  }
+`;
+
 export const Button = styled.button`
-  width: 40%;
+  width: 100%;
   border: none;
+  display: flex;
   cursor: pointer;
   padding: 15px 20px;
   border-radius: 5px;
+  justify-content: center;
   color: ${({ theme }) => theme.text};
   outline-color: ${({ theme }) => theme.primary}; 
   background-color: ${({ theme }) => theme.primary};
 
   &:hover{
-    background-color: ${({ theme }) => darken(0.02, theme.primary)}
+    background-color: ${({ theme }) => darken(0.03, theme.primary)}
   }
 
   ${mobile({ width: '100%' })}

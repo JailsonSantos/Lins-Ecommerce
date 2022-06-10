@@ -37,15 +37,19 @@ export const TopButton = styled.button<TopButtonProps>`
   cursor: pointer;
   font-weight: 600;
   border-radius: 5px;
-  border: ${(props) => props.filled === "filled" && "none"};
+  //border: ${(props) => props.filled === "filled" && "none"};
   color: ${(props) => props.filled === "filled" && "white"};
   background-color: ${(props) => props.filled === "filled" ? props.theme.backgroundDark : 'transparent'};
 
   transition: all 0.2s ease;
 
   &:hover{
-    background-color: ${(props) => props.filled === "filled" ? darken(0.05, props.theme.backgroundDark) : 'transparent'};
+    color: ${({ theme }) => theme.text};
+    border-color: ${(props) => props.filled === "filled" ? props.theme.error : props.theme.primary};
+    background-color: ${(props) => props.filled === "filled" ? darken(0.05, props.theme.error) : props.theme.primary};
   }
+
+  ${mobile({ padding: '5px', fontSize: '14px', margin: '0 5px', width: '150px' })}
 `;
 
 export const TopTexts = styled.div`
@@ -79,10 +83,14 @@ export const Product = styled.div`
 export const ProductDetail = styled.div`
   flex: 2;
   display: flex;
+
+  ${mobile({ flexDirection: 'column', margin: '0 auto' })}
 `;
 
 export const Image = styled.img`
   width: 200px;
+  
+  ${mobile({ margin: '0 auto' })}
 `;
 
 export const Details = styled.div`
@@ -142,7 +150,7 @@ export const ProductPrice = styled.div`
 `;
 
 export const Hr = styled.hr`
-  height: 1px;
+  height: 1.5px;
   border: none;
   margin: 10px 0;
   background-color: ${({ theme }) => theme.borderLight};

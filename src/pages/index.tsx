@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Navbar } from "../components/Navbar";
 import { Slider } from "../components/Slider";
 import { Footer } from "../components/Footer";
@@ -8,7 +9,7 @@ import { Announcement } from "../components/Announcement";
 
 export default function Home() {
   return (
-    <>
+    <Fragment>
       <Announcement />
       <Navbar />
       <Slider />
@@ -16,6 +17,6 @@ export default function Home() {
       <Products />
       <Newsletter />
       <Footer />
-    </>
+    </Fragment>
   );
 }

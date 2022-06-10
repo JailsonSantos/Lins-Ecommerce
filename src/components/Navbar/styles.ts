@@ -4,7 +4,7 @@ import { mobile } from "../../styles/Responsive";
 export const Container = styled.div`
   height: 4rem;
 
-  ${mobile({ height: '50px' })}
+  ${mobile({ height: '95px' })}
 `;
 
 export const Wrapper = styled.div`
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between; 
 
-  ${mobile({ padding: '10px 0px' })} 
+  ${mobile({ padding: '10px 0px', flexDirection: 'column-reverse' })} 
 `;
 
 export const Left = styled.div`
@@ -49,24 +49,46 @@ export const Input = styled.input`
   border: none;
   outline: none;
 
-  ${mobile({ width: '50px' })}
+  ${mobile({ width: '250px' })}
 `;
 
 export const Center = styled.div` 
-  flex: 1;
-  text-align: center;
+  display: flex;
+  flex: 2;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-export const Logo = styled.h1`
-  font-weight: bold;
-  ${mobile({ fontSize: '24px' })}
+export const Logo = styled.img`
+  width: 100px;
+  animation: go-back 5s infinite alternate;
+
+  @keyframes go-back {
+    from {
+      transform: translateX(350px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  ${mobile({ animation: 'go-back2 1s infinite alternate' })}
+
+  @keyframes go-back2 {
+    from {
+      transform: translateX(10px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 `;
 
 export const Right = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  padding-right: 5px;
 
   ${mobile({ flex: 2, justifyContent: 'center' })}
 `;
@@ -84,7 +106,7 @@ export const MenuItem = styled.div`
     background-color: ${({ theme }) => theme.primary};
   }
   
-  ${mobile({ fontSize: '12px', marginLeft: '10px' })}
+  ${mobile({ fontSize: '12px', marginLeft: '2px' })}
 `;
 
 export const ImageAvatar = styled.img`

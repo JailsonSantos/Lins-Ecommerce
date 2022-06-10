@@ -22,7 +22,7 @@ function generatePagesArrays(from: number, to: number) {
 
 export function Pagination({
   totalCountOfRegisters,
-  registersPerPage = 2,
+  registersPerPage = 5,
   currentPage = 1,
   onPageChange
 }: PaginationProps) {
@@ -37,11 +37,10 @@ export function Pagination({
     ? generatePagesArrays(currentPage, Math.min(currentPage + siblingsCount, lastPage))
     : []
 
-
   return (
     <AreaPagination>
       <Box>
-        <strong>0</strong> - <strong>10</strong> de <strong>100</strong>
+        <strong>1</strong> - <strong>{registersPerPage < totalCountOfRegisters ? registersPerPage : totalCountOfRegisters}</strong> de <strong>{totalCountOfRegisters}</strong>
       </Box>
       <Stack>
 

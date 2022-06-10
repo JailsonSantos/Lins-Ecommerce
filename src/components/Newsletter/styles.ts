@@ -16,8 +16,9 @@ export const Container = styled.div`
 export const Title = styled.h1`
   font-size: 4.5rem;
   margin-bottom: 20px;
+  text-align: center;
 
-  ${mobile({ fontSize: '3.5rem' })}
+  ${mobile({ fontSize: '2.5rem' })}
 `;
 
 export const Description = styled.div`

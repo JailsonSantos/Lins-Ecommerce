@@ -7,13 +7,19 @@ export const Info = styled.div`
   opacity: 0;
   width: 100%;
   height: 100%;
-  display: flex;
   cursor: pointer;
   position: absolute;
-  align-items: center;
-  justify-content: center;
+  border-radius: 5px;
   transition: all 0.5s ease;
   background-color: rgba(0,0,0,0.2);
+`;
+
+export const InfoAreaIcon = styled.div`
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 40px);
 `;
 
 export const Container = styled.div`
@@ -23,6 +29,7 @@ export const Container = styled.div`
   padding: 5px;
   display: flex;
   min-width: 280px;
+  font-weight: 700;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -62,3 +69,24 @@ export const Icon = styled.div`
   }
 `;
 
+export const IconPrice = styled.div`
+  width: 100%;
+  height: 40px;
+  opacity: 0.9;
+  display: flex;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  transform: scale(0.9);
+  justify-content: center;
+  transition: all 0.5s ease;
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.primary};
+
+  &:hover{
+    opacity: 1;
+    transform: scale(1) ;
+    border-radius: 0 0 5px 5px;
+    background-color: ${({ theme }) => theme.primary};
+  }
+`;
