@@ -1,24 +1,27 @@
 export const slideItems = [
   {
     id: 1,
-    img: 'https://1259028l.ha.azioncdn.net/img/2016/12/produto/7129/vestido-floral-de-verao-principessa-fabi.jpg',
-    title: 'SUMMER SALE',
-    description: 'DONT COMPROMISE ON STYLE! GET FLAT 30% OF FOR NEW ARRIVALS.',
-    bgColor: '#fff002'
+    img: 'https://www.fashionbubbles.com/wp-content/blogs.dir/1/files/2016/02/jaqueta-jeans-masculina-00.jpg',
+    title: 'COLEÇÃO MASCULINA',
+    description: 'NA SUA COMPRA EM UMA DAS COLEÇÕES EM DESTAQUE, GANHE ATÉ 30% DE DESCONTO EM QUALQUER PEÇA.',
+    cat: 'Masculina',
+    bgColor: '#FFFFFF',
   },
   {
     id: 2,
-    img: 'https://lojastyleme.files.wordpress.com/2018/12/117d7f2217054ba25abdfd79ae6182cf.jpg?w=640',
-    title: 'AUTUMN COLLECTION',
-    description: 'DONT COMPROMISE ON STYLE! GET FLAT 30% OF FOR NEW ARRIVALS.',
-    bgColor: '#fff255'
+    img: 'https://alignerstudio.com.br/wp-content/uploads/2021/03/slide-2-mulher-sorriso-invisalign-alignerstudio.png',
+    title: 'COLEÇÃO FEMININA',
+    description: 'NA SUA COMPRA EM UMA DAS COLEÇÕES EM DESTAQUE, GANHE ATÉ 30% DE DESCONTO EM QUALQUER PEÇA.',
+    cat: 'Feminina',
+    bgColor: '#FFFFFF',
   },
   {
     id: 3,
-    img: 'https://tudoela.com/wp-content/uploads/2018/02/imagem-1.jpg',
-    title: 'INVERN COLLECTION',
-    description: 'DONT COMPROMISE ON STYLE! GET FLAT 30% OF FOR NEW ARRIVALS.',
-    bgColor: '#ffff26'
+    img: 'https://thumbs.dreamstime.com/b/grupo-de-crian%C3%A7as-desportivos-alegres-felizes-que-saltam-e-que-dan%C3%A7am-90542048.jpg',
+    title: 'COLEÇÃO INFANTIL',
+    description: 'NA SUA COMPRA EM UMA DAS COLEÇÕES EM DESTAQUE, GANHE ATÉ 30% DE DESCONTO EM QUALQUER PEÇA.',
+    cat: 'Infantil',
+    bgColor: '#FFFFFF',
   },
 ]
 

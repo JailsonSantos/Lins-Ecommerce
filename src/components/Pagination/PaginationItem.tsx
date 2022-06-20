@@ -6,7 +6,12 @@ interface PaginationItemProps {
   onPageChange: (page: number) => void;
 }
 
-export function PaginationItem({ number, isCurrent = false, onPageChange }: PaginationItemProps) {
+export function PaginationItem(
+  { number,
+    onPageChange,
+    isCurrent = false
+  }: PaginationItemProps) {
+
   if (isCurrent) {
     return (
       <ButtonActived>

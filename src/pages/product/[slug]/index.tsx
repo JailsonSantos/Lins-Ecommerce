@@ -26,10 +26,9 @@ import {
 } from '../../../styles/ProductStyles';
 
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import { Add, Remove } from '@material-ui/icons';
 import { publicRequest } from '../../../services/api';
-
-import { useDispatch } from 'react-redux';
 import { addProduct } from '../../../redux/cartRedux';
 
 interface ProductProps {
@@ -97,8 +96,6 @@ export default function Product() {
       )
     );
   };
-
-  console.log(color)
 
   return (
     <Container>

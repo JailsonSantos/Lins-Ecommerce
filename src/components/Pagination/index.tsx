@@ -1,6 +1,7 @@
-import { AreaPagination, Box, Stack, Text } from './styles';
+import { AreaPagination, Box, Stack, Text, Image } from './styles';
 
 import { PaginationItem } from "./PaginationItem";
+import { Fragment } from 'react';
 
 interface PaginationProps {
   totalCountOfRegisters: number;
@@ -38,37 +39,44 @@ export function Pagination({
     : []
 
   return (
-    <AreaPagination>
-      <Box>
-        <strong>1</strong> - <strong>{registersPerPage < totalCountOfRegisters ? registersPerPage : totalCountOfRegisters}</strong> de <strong>{totalCountOfRegisters}</strong>
-      </Box>
-      <Stack>
+    <Fragment>
+      {totalCountOfRegisters >= 1 ?
+        <AreaPagination>
+          <Fragment>
+            <Box>
+              <strong>Pagina {currentPage} </strong> de <strong> Pagina {lastPage} </strong>
+            </Box>
+            <Stack>
 
-        {currentPage > (1 + siblingsCount) && (
-          <>
-            <PaginationItem onPageChange={onPageChange} number={1} />
-            {currentPage > (2 + siblingsCount) && <Text>...</Text>}
-          </>
-        )}
+              {currentPage > (1 + siblingsCount) && (
+                <>
+                  <PaginationItem onPageChange={onPageChange} number={1} />
+                  {currentPage > (2 + siblingsCount) && <Text>...</Text>}
+                </>
+              )}
 
-        {previousPage.length > 0 && previousPage.map((page) => {
-          return <PaginationItem onPageChange={onPageChange} key={page} number={page} />
-        })}
+              {previousPage.length > 0 && previousPage.map((page) => {
+                return <PaginationItem onPageChange={onPageChange} key={page} number={page} />
+              })}
 
-        <PaginationItem onPageChange={onPageChange} number={currentPage} isCurrent />
+              <PaginationItem onPageChange={onPageChange} number={currentPage} isCurrent />
 
-        {nextPage.length > 0 && nextPage.map((page) => {
-          return <PaginationItem onPageChange={onPageChange} key={page} number={page} />
-        })}
+              {nextPage.length > 0 && nextPage.map((page) => {
+                return <PaginationItem onPageChange={onPageChange} key={page} number={page} />
+              })}
 
-        {(currentPage + siblingsCount) < lastPage && (
-          <>
-            {(currentPage + 1 + siblingsCount) < lastPage && <Text>...</Text>}
-            <PaginationItem onPageChange={onPageChange} number={lastPage} />
-          </>
-        )}
-
-      </Stack>
-    </AreaPagination>
+              {(currentPage + siblingsCount) < lastPage && (
+                <>
+                  {(currentPage + 1 + siblingsCount) < lastPage && <Text>...</Text>}
+                  <PaginationItem onPageChange={onPageChange} number={lastPage} />
+                </>
+              )}
+            </Stack>
+          </Fragment>
+        </AreaPagination>
+        :
+        <Image src="/images/not-found.jpg" />
+      }
+    </Fragment>
   );
 }

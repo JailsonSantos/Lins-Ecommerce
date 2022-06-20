@@ -11,5 +11,5 @@ export const Container = styled.div`
   font-size: 1rem;
   font-weight: 500;
 
-  ${mobile({ fontSize: '13px' })};
+  ${mobile({ fontSize: '0.75rem', padding: '0 10px' })};
 `;

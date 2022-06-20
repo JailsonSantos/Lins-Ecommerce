@@ -44,8 +44,6 @@ const initialState: SliceState = {
   total: 0,
 }
 
-//console.log(initialState)
-
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Product } from '../Product';
-import { Container } from './styles';
+import { Container, ProductArea, ProductTitle } from './styles';
 import { publicRequest } from '../../services/api';
 
 interface ProductsProps {
@@ -35,8 +35,8 @@ export function FeaturedProducts() {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await publicRequest.get("products");
-        setProducts(response.data);
+        const response = await publicRequest.get("products?new=true"); //?new=true, mostra os ultimos cadastrados
+        setProducts(response.data.products);
       } catch (err: any) {
         console.log(err.message)
       }
@@ -46,9 +46,12 @@ export function FeaturedProducts() {
 
   return (
     <Container>
-      {products.slice(0, 8).map((product) => (
-        <Product key={product._id} product={product} />
-      ))}
+      <ProductTitle>Produdos em Destaque</ProductTitle>
+      <ProductArea>
+        {products.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
+      </ProductArea>
     </Container>
   );
 }

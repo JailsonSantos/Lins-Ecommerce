@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Navbar } from '../../../components/Navbar';
 import { Footer } from '../../../components/Footer';
@@ -15,8 +15,6 @@ import {
   Select,
   Option,
 } from '../../../styles/ProductListStyles';
-import { Pagination } from '../../../components/Pagination';
-import { publicRequest } from '../../../services/api';
 
 interface EventProps {
   target: {
@@ -34,6 +32,7 @@ export default function ProductsList() {
 
   const router = useRouter();
   const category = router.query.slug;
+
   const [sort, setSort] = useState('newest');
   const [filters, setFilters] = useState<FilterProps>({} as FilterProps);
 
@@ -50,12 +49,12 @@ export default function ProductsList() {
     <Container>
       <Navbar />
       <Announcement />
-      <Title>{category}</Title>
+      <Title>Categoria: {category}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filtrar:</FilterText>
           <Select name='color' onChange={handleFilters}>
-            <Option disabled>Color</Option>
+            <Option value="todas">Todas as cores</Option>
             <Option value="Yellow">Amarelo</Option>
             <Option value="Blue">Azul</Option>
             <Option value="Beige">Bege</Option>
@@ -70,7 +69,7 @@ export default function ProductsList() {
             <Option value="Red">Vermelho</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
-            <Option disabled>Size</Option>
+            <Option value="todas">Todos os tamanhos</Option>
             <Option>P</Option>
             <Option>M</Option>
             <Option>G</Option>
@@ -79,7 +78,7 @@ export default function ProductsList() {
           </Select>
         </Filter>
         <Filter>
-          <FilterText>Sort Products</FilterText>
+          <FilterText>Produtos:</FilterText>
           <Select onChange={(event) => setSort(event.target.value)}>
             <Option value="newest">Mais novo</Option>
             <Option value="desc">Maior Preço</Option>
@@ -87,7 +86,7 @@ export default function ProductsList() {
           </Select>
         </Filter>
       </FilterContainer>
-      <Products category={category} filters={filters} sort={sort} />
+      <Products category={String(category!)} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>

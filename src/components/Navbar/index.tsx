@@ -17,13 +17,9 @@ import {
 } from './styles';
 
 import Link from 'next/link';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { useTheme } from 'styled-components';
-
-import logo from '../../assets/logo.svg';
-
+import { RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { logout } from '../../redux/apiCalls';
 
@@ -35,13 +31,6 @@ export function Navbar() {
   const { currentUser } = useSelector((state: RootState) => state.user)
 
   const dispatch = useDispatch();
-
-  /* console.log(typeof logo);
-  JSON.stringify
- */
-
-  // const cart = useSelector((state: RootState) => state.cart);
-  //console.log("REDUX CART: ", cart);
 
   return (
     <Container>
@@ -56,7 +45,7 @@ export function Navbar() {
         <Center>
           <Link href="/">
             <a>
-              <Logo src="logo.svg" alt="Logo da aplicação Lins E-commerce" />
+              <Logo src="/images/logo.svg" alt="Logo da aplicação Lins E-commerce" />
             </a>
           </Link>
 

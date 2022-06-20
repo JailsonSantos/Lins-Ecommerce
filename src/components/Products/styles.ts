@@ -4,7 +4,8 @@ export const Container = styled.div`
   display: flex;
   padding: 20px;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ProductList = styled.h1`

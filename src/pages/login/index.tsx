@@ -123,7 +123,7 @@ export default function Login() {
 
           <ButtonGoogle >
             <IconGoogle
-              src="google.svg"
+              src="/images/google.svg"
               alt="Logo da google, chamando a atenção para o botão de fazer login com a conta google"
             />
             Fazer login com o Google

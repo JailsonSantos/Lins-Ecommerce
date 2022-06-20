@@ -7,8 +7,8 @@ type Product = {
   description: string;
   img: string;
   categories: string[];
-  size: string;
-  color: string;
+  size: string[];
+  color: string[];
   price: number;
   inStock: true;
   quantity: number;
@@ -17,25 +17,26 @@ type Product = {
   updatedAt: string;
 }
 
-type GetProductResponse = {
+type GetProductsResponse = {
   totalCount: number;
   products: Product[];
 }
 
-// Função de busca de usuarios na api
-export async function getProducts(page: number): Promise<GetProductResponse> {
-  const { data, headers } = await publicRequest.get('products', {
-    params: {
-      page,
-    }
-  })
+// Função de busca de produtos na api
+export async function getProducts(page: number, category: string): Promise<GetProductsResponse> {
 
-  const totalCount = Number(headers['x-total-count'])
+  const { data } = await publicRequest.get("products", {
+    params: {
+      category,
+      page
+    }
+  });
+  const totalCount = data.total;
 
   // Formatando os dados de users
   const products = data.products.map((product: Product) => {
     return {
-      id: product._id,
+      _id: product._id,
       title: product.title,
       description: product.description,
       img: product.img,
@@ -57,7 +58,8 @@ export async function getProducts(page: number): Promise<GetProductResponse> {
         year: 'numeric'
       })
     }
-  })
+  });
+
   return {
     products,
     totalCount
@@ -65,8 +67,10 @@ export async function getProducts(page: number): Promise<GetProductResponse> {
 }
 
 // Função de buscar ou atualizar produtos do React Query
-export function useProducts(page: number) {
-  return useQuery(['products', page], () => getProducts(page), {
-    staleTime: 1000 * 60 * 10, // Define o tempo que vai estar em fresh por 10 minutos
+export function useProducts(page: number, category: string) {
+  return useQuery(['products', page, category], () => getProducts(page, category), {
+    staleTime: 1000 * 60 * 10, // Define o tempo que vai estar em fresh de 10 minutos
   });
 }
+
+//staleTime: 1000 * 5,  Define o tempo que vai estar em fresh de 5 segundos

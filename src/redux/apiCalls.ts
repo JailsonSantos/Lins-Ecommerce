@@ -52,7 +52,6 @@ export const logout = async (dispatch: ((arg0: { payload: undefined; type: strin
   }
 }
 
-
 export const clearCart = async (dispatch: ((arg0: { payload: undefined; type: string; }) => void)) => {
 
   try {

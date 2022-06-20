@@ -8,13 +8,18 @@ export const Container = styled.div`
 `;
 
 export const CategoriesTitle = styled.h1`
-min-width: 360px;
   height: 40px;
+  display: flex;
   margin: 10px 0;
-  border-radius: 50px;
+  min-width: 360px;
   text-align: center;
+  align-items: center;
+  border-radius: 50px;
+  justify-content: center;
   color: ${({ theme }) => theme.text};
   background-color: ${({ theme }) => theme.primary};
+
+  ${mobile({ fontSize: '1.5rem', minWidth: '300px' })};
 `;
 
 export const CategoriesList = styled.div`

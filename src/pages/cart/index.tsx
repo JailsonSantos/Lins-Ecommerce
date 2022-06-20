@@ -1,8 +1,8 @@
 import { Add, Remove } from '@material-ui/icons';
+import { Navbar } from '../../components/Navbar';
+import { Footer } from '../../components/Footer';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Announcement } from '../../components/Announcement';
-import { Footer } from '../../components/Footer';
-import { Navbar } from '../../components/Navbar';
 
 import {
   Container,
@@ -35,21 +35,18 @@ import {
   SummaryItemText,
   SummaryItemPrice,
   Button,
-
 } from '../../styles/CartStyles';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 
-import StripeCheckout from 'react-stripe-checkout';
-import { userRequest } from '../../services/api';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
+import theme from '../../styles/theme';
+import { useRouter } from 'next/router';
+import { userRequest } from '../../services/api';
 import { clearCart } from '../../redux/apiCalls';
-
-interface StripeTokenProps {
-  id: string;
-}
+import StripeCheckout from 'react-stripe-checkout';
 
 export default function Cart() {
 
@@ -68,38 +65,29 @@ export default function Cart() {
     setStripeToken(token);
   }
 
-  /* 
-  const { quantity } = cart;
-  const [quantityTotal, setQuantityTotal] = useState(quantity);
-  
-  const handleQuantity = (type: string) => {
-      if (type === 'desc') {
-        quantityTotal > 1 && setQuantityTotal(quantityTotal - 1)
-  
-        console.log(quantityTotal)
-      } else {
-        setQuantityTotal(quantityTotal + 1)
-        console.log(quantityTotal)
-      }
-    } */
-
-
   useEffect(() => {
     const makeRequest = async () => {
       try {
 
-        console.log('TOKEN STRIPE: ', stripeToken);
-
-        const response = await userRequest.post('/checkout/payment', {
+        await userRequest.post('/checkout/payment', {
           tokenId: stripeToken.id,
           amount: total * 100,
         });
 
-        console.log('RESPONSE: ', response.data)
-        router.push("/", response.data);
+        toast("Compra finalizada com Sucesso!", {
+          style: {
+            background: theme.green,
+            color: theme.text,
+          }
+        });
 
       } catch (error) {
-        console.log(error);
+        toast("Error: Tente novamente!", {
+          style: {
+            background: theme.error,
+            color: theme.text,
+          }
+        });
       }
     }
     stripeToken.id !== undefined && total >= 1 && makeRequest();
@@ -129,7 +117,7 @@ export default function Cart() {
             filled="filled"
             onClick={() => clearCart(dispatch)}
           >
-            LIMPAR O CARRINHO DE COMPRAS
+            LIMPAR O CARRINHO
           </TopButton>
 
         </ Top>
