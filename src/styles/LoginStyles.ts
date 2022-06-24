@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import { mobile } from './Responsive';
+import { mobile, tablet } from './Responsive';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -14,12 +14,15 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 25%;
+  width: 30%;
   padding: 20px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background};
+  
+  ${tablet({ width: '50%' })}
 
   ${mobile({ width: '90%' })}
+
 `;
 
 export const Title = styled.h1`

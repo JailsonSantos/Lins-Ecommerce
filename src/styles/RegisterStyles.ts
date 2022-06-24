@@ -1,6 +1,6 @@
 import { darken } from 'polished';
 import styled from 'styled-components';
-import { mobile } from './Responsive';
+import { mobile, tablet } from './Responsive';
 
 export const Container = styled.div`
   width: 100vw;
@@ -18,6 +18,8 @@ export const Wrapper = styled.div`
   padding: 20px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.background};
+
+  ${tablet({ width: '50%' })}
 
   ${mobile({ width: '90%' })}
 `;
